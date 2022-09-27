@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <%-include('navbar.ejs')%>
+  <style>
+    /* Dropdown Button */
+.dropbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content label {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+  </style>
+  <h1 style="text-align: center; margin: 1rem;"><%=locals.searchName%> 태그 검색결과</h1>
+  <div class="dropdown">
+    <form action="/search/tag" method="get" >
+    <button class="dropbtn" >태그 재검색</button>
+    <div class="dropdown-content">
+      <%for(let i=0;i<locals.tag.length;i++){%>
+      <label for=<%=locals.tag[i]%>><%=locals.tag[i]%> <input type="checkbox" name="search" id=<%=locals.tag[i]%> style="display:inline-block" value=<%=locals.tag[i]%>></label>
+      <%}%>
+    </div>
+    </form>    
+</div>
+  <div class="container-sm">
+    <div class="row">
+      <% for(let i=0;i<locals.novel.length;i++){ %>
+
+        <div class="col-sm-6" style="width:20rem; height: 30rem;">
+          <div class="card" style="width:18rem">
+            <img height="200px" src=<%='http://localhost:3000/novel/uploads/'+locals.novel[i]._id+'.png' || "https://media.istockphoto.com/vectors/default-image-icon-vector-missing-picture-page-for-website-design-or-vector-id1357365823?k=20&m=1357365823&s=612x612&w=0&h=ZH0MQpeUoSHM3G2AWzc8KkGYRg4uP_kuu0Za8GFxdFc="%>><br>
+            <div class="card-body">
+              <h5 class="card-title"><%=locals.novel[i].novelName%></h5>
+              <p class="card-text"><%=locals.novel[i].novelLore%></p>
+              <p class="card-text">좋아요 : <%=locals.novel[i].novelLiked%><br>작가 : <%=locals.novel[i].novelAuthorName%></p>
+              <a href=<%="/novel/"+locals.novel[i]._id%> class="btn btn-primary">보러가기</a>
+            </div>
+          </div>
+        </div>
+     
+  <% } %>
+    </div>
+    </div>
+</body>
+</html>

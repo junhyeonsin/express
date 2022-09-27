@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<style>
+  body{
+    font-family: 'Poppins';
+  }
+</style>
+<body>
+  <%-include('navbar.ejs')%>
+  <div>
+    <img class="img-thumbnail" width="200px" height="200px" src=<%= locals.novelThumbnail || "https://media.istockphoto.com/vectors/default-image-icon-vector-missing-picture-page-for-website-design-or-vector-id1357365823?k=20&m=1357365823&s=612x612&w=0&h=ZH0MQpeUoSHM3G2AWzc8KkGYRg4uP_kuu0Za8GFxdFc="%>>
+    <h2 style="display: inline;"><%= locals.novelName || "에러" %></h2>
+  </div>
+  설명 : <%= locals.novelLore || "에러" %><br>
+  작성자 : <%= locals.novelAuthor || "에러"%><br>
+  좋아요 : <%= locals.novelLiked%>
+  <%if(locals.isLiked){ %>❤
+    <%if(!locals.isAuthor){%>
+      <a href=<%=locals.novelUrl+"/liked"%>>좋아요 취소하기</a>
+      <%}%>
+  <%}else{%>🤍
+    <%if(!locals.isAuthor){%>
+      <a href=<%=locals.novelUrl+"/liked"%>>좋아요 누르기</a>
+      <%}%>
+  <%}%>
+
+  <br>
+  총회차 : <%= locals.novelContent.length%><br>
+  태그 : 
+  <%for(let i=0;i<locals.novelTag.length;i++){%>
+    <a href=<%="/search/tag?search="+locals.novelTag[i]%>>#<%=locals.novelTag[i]%></a>
+  <%}%><br>
+  <% for(let i=0;i<locals.novelContent.length;i++){%>
+    <a href=<%=locals.novelUrl+"/"+i%>><%=i%>화 <%=locals.novelContent[i].episodeName%> <%=locals.novelContent[i].date.toLocaleDateString()%></a><br>
+  <% } %>  
+  <% if(locals.isAuthor){ %>
+    <a href=<%=locals.novelUrl+"/tag"%>>태그수정</a>
+    <a href=<%=locals.novelUrl+"/delete"%>>삭제하기</a>
+    <a href=<%=locals.novelUrl+"/edit"%>>수정하기</a>
+    <a href=<%=locals.novelUrl+"/write"%>>글쓰기</a>
+  <% } %>
+
+</body>
+</html>

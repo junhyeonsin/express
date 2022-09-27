@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <%-include('navbar.ejs')%>
+  <form action="" method="post" autocomplete="off">
+    <div class="mb-3">
+      <input class="form-control form-control-lg" type="text" placeholder="제목" name="novelName" aria-label=".form-control-lg example" required value=<%= locals.novelName%>>      
+    </div>
+    <div class="mb-3">
+      <textarea class="form-control" id="exampleFormControlTextarea1" name="novelLore" placeholder="설명" rows="3" required ><%= locals.novelLore%></textarea>  
+    </div>
+    <div class="mb-3">
+      <label for="preview-image" class="form-label">사진 미리보기</label>
+      <img id="preview-image" style="width: 200px; height:200px;" class="form-control" src=<%=locals.novelThumbnail%>>
+    </div>
+    <div class="mb-3">
+      <label for="image-input" class="form-label">사진넣기</label>
+      <input type="file" class="form-control" name="novelThumbnail" accept="image/png, image/jpeg" id="image-input"> 
+      <script>
+        function readImage(input){
+          if(input.files[0]){
+            const reader = new FileReader();
+
+            reader.onload = e=>{
+              const preview = document.getElementById('preview-image')
+              preview.src=e.target.result
+            }
+            reader.readAsDataURL(input.files[0])
+          }
+        }
+        const imageinput=document.getElementById('image-input')
+        imageinput.addEventListener('change', e=>{
+          readImage(e.target)
+        })
+      </script>
+    </div>
+    <div class="mb-3">      
+      <%if(locals.novelName){%>
+        <button class="btn btn-success">수정하기</button>
+        <%}else{%>
+        <button class="btn btn-success">만들기</button>
+      <%}%>   
+    </div>    
+  </form>
+  
+</body>
+</html>

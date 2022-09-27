@@ -1,0 +1,18 @@
+<style>
+  th{
+    font-size: 30px;
+    padding: 1rem;
+    font-family: 'Poppins,sans-serif';
+  }
+</style>
+<table  style="margin: 0 auto;">
+  <th>
+    <a href=<%="/search/name?search="+locals.searchName%>>제목으로 검색</a>
+  </th>
+  <th>
+    <a href=<%="/search/author?search="+locals.searchName%>>작가명으로 검색</a> 
+  </th>
+</table>
+<% if(locals.novel.length==0){%>
+  <h1 style="text-align:center;">"<%=locals.searchName%>" 검색 결과를 찾지 못했습니다.</h1>
+<% } %>

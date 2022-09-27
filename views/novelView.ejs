@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+  <title>Document</title>
+</head>
+<body>
+  <%-include('navbar.ejs')%>  
+  <a href=<%=locals.novelUrl%>>작품으로 돌아가기</a>
+
+  <% if(locals.isAuthor){ %>
+  <a href="" id="edit">수정하기</a>
+  <script>
+    let anchor = document.getElementById('edit')
+    anchor.href=`${document.location.href}/edit`
+  </script>  
+  <% } %>
+  <h1 style="text-align: center; margin: 2rem;"><%= locals.episode %>화. <%= locals.episodeName %></h1>
+  <div style="width: 90%; margin: 0 auto;">
+    <pre style="font-family:'Poppins', sans-serif; font-size: 20px; white-space: pre-line;">
+      <%=locals.content%>
+    </pre>      
+  </div>
+    <div>
+    <table style="margin: 0 auto; font-family: 'Poppins', sans-serif; font-size: 25px; ">
+      <th style="padding: 1rem;">
+        <%if(locals.episode>0){%>
+          <a href=<%=`${locals.novelUrl}/${locals.episode-1}`%>>이전화</a>
+          <%}else{%>
+            이전화
+          <%}%>  
+      </th>
+      <th style="padding: 1rem;">
+        <%if(locals.next){%>
+          <a href=<%=`${locals.novelUrl}/${locals.episode+1}`%>>다음화</a>
+        <%}else{%>
+          다음화
+        <%}%>
+      </th>  
+    </table>
+      </div>
+      <div class="mb-3">
+        <form action="" method="post" autocomplete="off">
+          <textarea class="form-control" id="exampleFormControlTextarea1" name="comment" placeholder="욕설,비방,광고,스포일러 등은 제재의 대상이 될수있습니다. " rows="3" required ></textarea>  
+          <button class="btn btn-success">댓글쓰기</button>
+        </form>
+      </div>
+      <%for(let i=locals.comment.length-1;i>-1;i--){%>
+        작성자 : (<%=locals.comment[i].userName%>) 내용: <%=locals.comment[i].value%><br> 
+      <%}%>
+</body>
+</html>

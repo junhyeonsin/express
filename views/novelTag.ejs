@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <%-include("navbar.ejs")%>
+  태그:
+  <form action="" method="post">
+  <%for(let i=0;i<locals.tag.length;i++){%>
+  <div>
+    <%=locals.tag[i]%>
+    <%if(locals.tagged){%>
+    <%if(locals.tagged.includes(locals.tag[i])){%>
+      <input type="checkbox" name="tag" value=<%=locals.tag[i]%> checked>
+    <%}else{%>
+      <input type="checkbox" name="tag" value=<%=locals.tag[i]%>>
+    <%}%>
+    <%}else{%>
+      <input type="checkbox" name="tag" value=<%=locals.tag[i]%>>
+    <%}%>
+    </div>
+  <%}%>
+  <button class="btn btn-success">제출하기</button>
+</form>  
+</body>
+</html>

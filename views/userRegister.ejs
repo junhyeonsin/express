@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+</head>
+<body>
+  <%-include('navbar.ejs')%>
+
+  <div style="text-align:center;">
+    <h3 style="margin: 20px;" ><strong>
+      <%= locals.error || "" %>
+      </strong>
+      </h3>
+    <h1 style="margin:5%">회원가입</h1>
+    <form action="/register" method="post" autocomplete="off" style="text-align: center;" >
+      <div class="mb-3" style="display: flex; justify-content: center;">
+      <input type="text" class="form-control" style="width: 30%; text-align: center;" name="name" placeholder="닉네임" required value=<%= locals.nickname || "" %> >
+      </div>
+      <div class="mb-3" style="display: flex; justify-content: center;">
+      <input type="text" class="form-control" style="width: 30%; text-align: center;" name="id" placeholder="아이디" required value=<%= locals.id || "" %>>
+      </div>
+      <div class="mb-3" style="display: flex; justify-content: center;">
+        <input type="password" class="form-control" style="width: 30%; text-align:center;" name="password" placeholder="비밀번호" required value=<%= locals.password || "" %> >
+      </div>
+      <div class="mb-3" style="display: flex; justify-content: center;">
+        <input type="password" class="form-control" style="width: 30%; text-align:center;" name="repassword" placeholder="비밀번호 재입력" required >
+      </div>
+      <button type="submit" class="btn btn-success">회원가입하기</button>
+    </form>  
+  </div>
+  </body>
+</html>
